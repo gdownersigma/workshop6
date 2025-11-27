@@ -7,13 +7,21 @@ on:
 
 #what it does
 jobs:
-  example:
-    name: "Example job"
-    runs-on: "ubuntu-latest"
-    steps: 
-      - name: "Step 1"
-        run: echo "hi!"
-      - name: "Step 2"
-        run: echo "hi again!"
-      
+  quality_check:
+    name: "Quality Check"
+    runs-on: ubuntu-latest
+    steps:
+      #get access to repo code
+      - name: "Get repo"
+        uses: actions/checkout@v6
+      #install python
+      - name: "Install python"
+        uses: actions/setup-python@v6
+      #install relevant libraries
+      - name: "Install libraries"
+        run: pip install -r requirements.txt
+      #run pytest/pylint
+      - name: "Run pytest"
+        run: pytest
+
     
